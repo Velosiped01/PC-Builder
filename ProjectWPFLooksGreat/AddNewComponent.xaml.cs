@@ -25,43 +25,15 @@ namespace ProjectWPFLooksGreat
     public partial class AddNewComponent : Window
     {
         
-        private void SerializeXML(CpuModels CpuList)
+        private void SerializeXML(UniModels List, string filepath)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(CpuModels));
-            using (FileStream fs = new FileStream("CpuModels.xml", FileMode.OpenOrCreate))
-            {
-                xml.Serialize(fs, CpuList);
-
-            }
-        }
-        private void SerializeXML(MotherBoardModels MbList)
-        {
-            XmlSerializer xml = new XmlSerializer(typeof(MotherBoardModels));
-            using (FileStream fs = new FileStream("MotherBoardModels.xml", FileMode.OpenOrCreate))
-            {
-                xml.Serialize(fs, MbList);
-
-            }
-        }
-        /*
-        private CpuModels DeserializeXML(string filepath)
-        {
-            XmlSerializer xml = new XmlSerializer(typeof(CpuModels));
+            XmlSerializer xml = new XmlSerializer(typeof(UniModels));
             using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
             {
-                if (filepath == "CpuModels.xml")
-                {
-                    CpuModels xmlcpu = (CpuModels)xml.Deserialize(fs);
-                    return xmlcpu;
-                }else if ("MotherBoardModels.xml" == filepath)
-                {
-                    CpuModels xmlmb = (CpuModels)xml.Deserialize(fs);
-                    return xmlmb;
+                xml.Serialize(fs, List);
 
-                }
-                
             }
-        } */
+        }
         private  UniModels DeserializeXML(string filepath)
         {
            
@@ -89,52 +61,46 @@ namespace ProjectWPFLooksGreat
                 switch (componentCombobox.SelectedIndex)
                 {
 
-                    case 0:
-                        
-                        CpuModels cpuModels = new CpuModels();
-                        UniModels cpudoc = DeserializeXML("CpuModels.xml");
-                        foreach(UniModel uni in cpudoc.UniList)
+                    case 0://cpu
+                        UniModels cpuModels = new UniModels();
+                        if (File.Exists(@"CpuModels.xml"))
                         {
-                            CpuModel CPU = new CpuModel(uni.item1, Convert.ToInt32(uni.item2), Convert.ToInt32(uni.item3), uni.item4);
-                            cpuModels.CpuList.Add(CPU);
-                            SerializeXML(cpuModels);
-
+                            
+                            UniModels cpudoc = DeserializeXML("CpuModels.xml");
+                            foreach (CpuModel cpu in cpudoc.CpuList)
+                            {
+                                cpuModels.CpuList.Add(cpu);
+                            }
                         }
-                       /* CpuModels cpudoc = 
-                        foreach (CpuModel cpu in cpudoc.CpuList)
-                        {
-                            cpuModels.CpuList.Add(cpu);
-                        } */
-
                         try
                         {
                             CpuModel CPU = new CpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text), Convert.ToInt32(FreqTextBox.Text), SocketTextBox.Text);
                             cpuModels.CpuList.Add(CPU);
-                            SerializeXML(cpuModels);
+                            SerializeXML(cpuModels, "CpuModels.xml");
                         }
                         catch { }
                         break;
-                    case 1:
-                        MotherBoardModels mbModels = new MotherBoardModels();
-                        UniModels mbdoc = DeserializeXML("MotherBoardModels.xml");
-                        foreach (UniModel uni in mbdoc.UniList)
+                    case 1://motherboard
+                        UniModels mbModels = new UniModels();
+                        if (File.Exists(@"MotherBoardModels.xml"))
                         {
-                            MotherBoardModel MB = new MotherBoardModel(uni.item1, uni.item2, Convert.ToInt32(uni.item3), uni.item4);
-                            mbModels.MbList.Add(MB);
-                            SerializeXML(mbModels);
+                            UniModels mbdoc = DeserializeXML("MotherBoardModels.xml");
 
+                            foreach (MotherBoardModel mb in mbdoc.MbList)
+                            {
+                                mbModels.MbList.Add(mb);
+                            }
                         }
-
                         try
                         {
                             MotherBoardModel MB = new MotherBoardModel(ModelNameTextBox.Text, TdpTextBox.Text, Convert.ToInt32(FreqTextBox.Text), SocketTextBox.Text);
                             mbModels.MbList.Add(MB);
-                            SerializeXML(mbModels);
+                            SerializeXML(mbModels, "MotheBoardModels.xml");
                         }
                         catch { }
 
                         break;
-                    case 2:
+                    case 2://GPU
                        //"Gpu model";
                         
                         break;
