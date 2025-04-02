@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWPFLooksGreat"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:Accessibility="clr-namespace:Accessibility;assembly=Accessibility" x:Name="MainWindow1" x:Class="ProjectWPFLooksGreat.MainWindow"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:Accessibility="clr-namespace:Accessibility;assembly=Accessibility" xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core" x:Name="MainWindow1" x:Class="ProjectWPFLooksGreat.MainWindow"
         mc:Ignorable="d"
         Title="PCBuilder" Height="695" Width="1000" Background="#FFD5D5D5" SizeChanged="MainWindow1_SizeChanged" WindowStyle="None">
     <Grid x:Name="pcBuilderWindow" Margin="0,0,0,10">
@@ -81,50 +81,58 @@
         </Border>
         <Border BorderBrush="Black" Background="#FFBBF1AC" BorderThickness="1" HorizontalAlignment="Right" Height="73" Margin="0,0,45,20" VerticalAlignment="Bottom" Width="200" CornerRadius="20" Grid.Column="1">
             <StackPanel Margin="0,9,0,11" HorizontalAlignment="Center" Width="184">
-                <Button x:Name="compareButton" Content="Compare" FontSize="30" FontWeight="Bold" Height="53" Width="182" Click="compareButton_Click"/>
+                <Button x:Name="compareButton" Content="Compare" FontSize="30" FontWeight="Bold" Height="53" Width="182" Click="compareButton_Click" Background="{x:Null}" BorderBrush="{x:Null}"/>
             </StackPanel>
         </Border>
-        <Border x:Name="errorBorder" BorderBrush="White" Background="White"  BorderThickness="1" CornerRadius="20,20,20,20" Margin="600,100,45,109">
+        <Border x:Name="errorBorder" BorderBrush="White" Background="White"  BorderThickness="1" CornerRadius="20,20,20,20" Margin="600,100,45,108">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="50" Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
-            <StackPanel x:Name="cpuErrorStackPanel" Height="45" VerticalAlignment="Top" HorizontalAlignment="Center" Width="322">
-                <TextBlock TextWrapping="Wrap" Margin="0,0,0,0" x:Name="cpuError"  Text="Cpu error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="15" FontWeight="Bold" Width="308" Height="52"/>
+            <StackPanel x:Name="cpuErrorStackPanel" Height="474" VerticalAlignment="Center" HorizontalAlignment="Center" Width="322">
+                <TextBlock TextWrapping="Wrap" Margin="0,0,0,0" x:Name="CPUErrorTextBlock"  Text="Cpu error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="MBErrorTextBlock"  Text="MB error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="GPUErrorTextBlock"  Text="GPU error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="RAMErrorTextBlock"  Text="RAM error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="HSFErrorTextBlock"  Text="HSF error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="PSUErrorTextBlock"  Text="PSU error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="CASEErrorTextBlock"  Text="CASE error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
+                
             </StackPanel>
+
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" Margin="180,100,0,0" VerticalAlignment="Top" CornerRadius="20" Height="57" Width="378">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="cpuComboBox" FontSize="30" FontWeight="Bold" Height="57" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="cpuComboBox" FontSize="20" FontWeight="Bold" Height="57" Width="344" Cursor="Hand" IsSynchronizedWithCurrentItem="True" BorderBrush="White"/>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top" CornerRadius="20" Height="57" Width="378">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="mbComboBox" FontSize="30" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="mbComboBox" FontSize="20" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True" Background="White"/>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" Margin="180,240,0,0" VerticalAlignment="Top" CornerRadius="20" Height="55" Width="378">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="gpuComboBox" FontSize="30" FontWeight="Bold" Height="53" Width="344" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="gpuComboBox" FontSize="20" FontWeight="Bold" Height="53" Width="344" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="20" Height="57" Width="378" Margin="180,310,0,0">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="ramComboBox" FontSize="30" FontWeight="Bold" Height="57" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="ramComboBox" FontSize="20" FontWeight="Bold" Height="57" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="20" Height="57" Width="378" Margin="180,380,0,0">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="hsfComboBox" FontSize="30" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="hsfComboBox" FontSize="20" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="20" Height="57" Width="378" Margin="180,450,0,0">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="psuComboBox" FontSize="30" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="psuComboBox" FontSize="20" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="20" Height="57" Width="378" Margin="180,520,0,0">
             <StackPanel Margin="0,0,0,0">
-                <ComboBox x:Name="caseComboBox" FontSize="30" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
+                <ComboBox x:Name="caseComboBox" FontSize="20" FontWeight="Bold" Height="56" Width="345" Cursor="Hand" IsSynchronizedWithCurrentItem="True"/>
             </StackPanel>
         </Border>
 
@@ -133,10 +141,10 @@
         <Button x:Name="minimalizeButton" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top" Height="29" Width="21" Margin="0,16,62,0" FontFamily="Tahoma" FontSize="22" Padding="0,0,0,4" Cursor="Hand" Click="minimalizeButton_Click" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Border BorderBrush="Black" Background="#FF838982" BorderThickness="1" HorizontalAlignment="Left" Height="73" Margin="40,0,0,20" VerticalAlignment="Bottom" Width="300" CornerRadius="20">
             <StackPanel Margin="0,9,0,11" HorizontalAlignment="Center" Width="300">
-                <Button x:Name="addNewComponentButton" Content="Add New Component" FontSize="25" FontWeight="Bold" Height="53" Width="300" Click="addNewComponentButton_Click"/>
+                <Button x:Name="addNewComponentButton" Content="Add New Component" FontSize="25" FontWeight="Bold" Height="53" Width="300" Click="addNewComponentButton_Click" Background="{x:Null}" BorderBrush="{x:Null}"/>
             </StackPanel>
         </Border>
-        
+
 
 
 
@@ -144,5 +152,5 @@
 
 
     </Grid>
-    
+
 </Window>

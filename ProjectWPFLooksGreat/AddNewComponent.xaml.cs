@@ -18,6 +18,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 using System.Diagnostics.Eventing.Reader;
+using MaterialDesignThemes.Wpf;
 
 namespace ProjectWPFLooksGreat
 {
@@ -25,7 +26,7 @@ namespace ProjectWPFLooksGreat
     public partial class AddNewComponent : Window
     {
         
-        private void SerializeXML(UniModels List, string filepath)
+        private void SerializeXML(UniModels List, string filepath) //Serializace či zapis componentu do xml
         {
             XmlSerializer xml = new XmlSerializer(typeof(UniModels));
             using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
@@ -34,15 +35,16 @@ namespace ProjectWPFLooksGreat
 
             }
         }
-        private  UniModels DeserializeXML(string filepath)
+        private  UniModels DeserializeXML(string filepath) //Vyběr komponentu z xml
         {
            
             XmlSerializer xml = new XmlSerializer(typeof(UniModels));
             using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
-            {
-
-                UniModels xmluni = (UniModels)xml.Deserialize(fs);
-                return xmluni;
+            { 
+                
+                    UniModels xmluni = (UniModels)xml.Deserialize(fs);
+                
+               return xmluni;
             }
         }
         
@@ -54,7 +56,7 @@ namespace ProjectWPFLooksGreat
             InitializeComponent();
         }
 
-        private void addComponentButton_Click(object sender, RoutedEventArgs e)
+        private void addComponentButton_Click(object sender, RoutedEventArgs e)//přidava komponenty
         {
             if (ModelNameTextBox.Text != null && TdpTextBox != null && FreqTextBox.Text != null && SocketTextBox.Text != null)
             {
@@ -63,18 +65,18 @@ namespace ProjectWPFLooksGreat
 
                     case 0://cpu
                         UniModels cpuModels = new UniModels();
-                        if (File.Exists(@"CpuModels.xml"))
+                        if (File.Exists(@"CpuModels.xml"))//kontrola na nenulovy stav xml
                         {
                             
                             UniModels cpudoc = DeserializeXML("CpuModels.xml");
-                            foreach (CpuModel cpu in cpudoc.CpuList)
+                            foreach (CpuModel cpu in cpudoc.CpuList)//at´ nesmaže stare komponenty
                             {
                                 cpuModels.CpuList.Add(cpu);
                             }
                         }
                         try
                         {
-                            CpuModel CPU = new CpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text), Convert.ToInt32(FreqTextBox.Text), SocketTextBox.Text);
+                            CpuModel CPU = new CpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text), SocketTextBox.Text);
                             cpuModels.CpuList.Add(CPU);
                             SerializeXML(cpuModels, "CpuModels.xml");
                         }
@@ -93,9 +95,9 @@ namespace ProjectWPFLooksGreat
                         }
                         try
                         {
-                            MotherBoardModel MB = new MotherBoardModel(ModelNameTextBox.Text, TdpTextBox.Text, Convert.ToInt32(FreqTextBox.Text), SocketTextBox.Text);
+                            MotherBoardModel MB = new MotherBoardModel(ModelNameTextBox.Text, FreqTextBox.Text, SocketTextBox.Text, ramtextbox.Text);
                             mbModels.MbList.Add(MB);
-                            SerializeXML(mbModels, "MotheBoardModels.xml");
+                            SerializeXML(mbModels, "MotherBoardModels.xml");
                         }
                         catch { }
 
@@ -128,27 +130,30 @@ namespace ProjectWPFLooksGreat
                     {
 
                         case 0:
-                            ModelNameTextBox.Text = "Cpu model";
-                            SocketTextBox.Text = "Socket";
-                            TdpTextBox.Text = "Tdp";
-                            FreqTextBox.Text = "Frequency";
+                            ModelNameTextBox.Text = "Cpu model Name";
+                            TdpTextBox.Text = "Tdp<65>";
+                            FreqTextBox.Text = "EMPTY SPACE";
+                            SocketTextBox.Text = "Socket<AM4..>";
+                            ramtextbox.Text = "EMPTY SPACE";
                             break;
                         case 1:
                             ModelNameTextBox.Text = "Mother board name";
-                            SocketTextBox.Text = "Platform";
-                            TdpTextBox.Text = "form";
-                            FreqTextBox.Text = "Max cpu frequency"; 
+                            TdpTextBox.Text = "EMPTY SPACE";
+                            FreqTextBox.Text = "format<ATX...>";
+                            SocketTextBox.Text = "Socket<AM4..>";
+                            ramtextbox.Text = "Memory type<DDR4..>";
                             break;
-                        case 2: ModelNameTextBox.Text = "Gpu model";
-                            SocketTextBox.Text = "GPU interface";
+                        case 2: 
+                            ModelNameTextBox.Text = "Gpu model";
                             TdpTextBox.Text = "Width";
                             FreqTextBox.Text = "Height";
-                                break;
+                            SocketTextBox.Text = "GPU interface";
+                            break;
                         default:
                             ModelNameTextBox.Text = "Cpu model";
-                            SocketTextBox.Text = "Socket";
                             TdpTextBox.Text = "Tdp";
                             FreqTextBox.Text = "Frequency";
+                            SocketTextBox.Text = "Socket";
                             break;
                     }
                 }

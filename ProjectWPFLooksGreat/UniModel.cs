@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.TextFormatting;
 
 namespace ProjectWPFLooksGreat
 {
@@ -12,6 +13,7 @@ namespace ProjectWPFLooksGreat
         
         public List<CpuModel> CpuList { get; set; } = new List<CpuModel>();
         public List<MotherBoardModel> MbList { get; set; } = new List<MotherBoardModel>();
+        public List<GpuModel> GpuList { get; set; } = new List<GpuModel>();
 
 
     }
@@ -21,16 +23,14 @@ namespace ProjectWPFLooksGreat
     {
         public string cpu { get; set; }
         public int tdp { get; set; }
-        public int freq { get; set; }
         public string socket { get; set; }
 
         public CpuModel() { }
 
-        public CpuModel(string cpu, int tdp, int freq, string socket)
+        public CpuModel(string cpu, int tdp, string socket)
         {
             this.cpu = cpu;
             this.tdp = tdp;
-            this.freq = freq;
             this.socket = socket;
 
         }
@@ -39,19 +39,36 @@ namespace ProjectWPFLooksGreat
     public class MotherBoardModel
     {
         public string mbName { get; set; }
-        public string mbplatform { get; set; }
-        public int mbmaxcpufreq { get; set; }
+        public string mbsocket { get; set; }
         public string mbform { get; set; }
+        public string supportedram { get; set; }
 
         public MotherBoardModel() { }
 
-        public MotherBoardModel(string mbName, string mbplatform, int mbmaxcpufreq, string mbform)
+        public MotherBoardModel(string mbName, string mbform, string mbsocket, string supportedram)
         {
             this.mbName = mbName;
-            this.mbplatform = mbplatform;
-            this.mbmaxcpufreq = mbmaxcpufreq;
+            this.mbsocket = mbsocket;
             this.mbform = mbform;
+            this.supportedram = supportedram;
 
+        }
+    }
+    [Serializable]
+    public class GpuModel
+    {
+        public string gpuName { get; set; }
+        public int gpuLenght { get; set; }
+        public int gpuPowerComs { get; set; }
+        
+
+        public GpuModel() { }
+
+        public GpuModel(string gpuName, int gpuLenght, int gpuPowerComs)
+        {
+            this.gpuName = gpuName;
+            this.gpuLenght = gpuLenght;
+            this.gpuPowerComs = gpuPowerComs;
         }
     }
 }

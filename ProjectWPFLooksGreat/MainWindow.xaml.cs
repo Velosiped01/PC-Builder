@@ -8,22 +8,57 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.Linq;
+using System.Diagnostics.Eventing.Reader;
+using System.IO;
+
 
 namespace ProjectWPFLooksGreat
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     
     public partial class MainWindow : Window
     {
         public static AddNewComponent AddNewComponentWindow;
+        
+        private UniModels DeserializeXML(string filepath)
+        {
+
+            XmlSerializer xml = new XmlSerializer(typeof(UniModels));
+            using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
+            {
+
+                UniModels xmluni = (UniModels)xml.Deserialize(fs);
+
+                return xmluni;
+            }
+        }
+       
+        
 
         public MainWindow()
         {
             InitializeComponent();
-            
+            if (File.Exists(@"CpuModels.xml"))
+            {
+                UniModels cpuActual = DeserializeXML("CpuModels.xml");
+                foreach (CpuModel CPU in cpuActual.CpuList)
+                {
+                    cpuComboBox.Items.Add(CPU.cpu);
+                }
+            }
+            if (File.Exists(@"MotherBoardModels.xml"))
+            {
+                UniModels mbActual = DeserializeXML("MotherBoardModels.xml");
+                foreach (MotherBoardModel MB in mbActual.MbList)
+                {
+                    mbComboBox.Items.Add(MB.mbName);
+                }
+            }
         }
+
 
 
 
@@ -36,8 +71,23 @@ namespace ProjectWPFLooksGreat
 
         private void compareButton_Click(object sender, RoutedEventArgs e)
         {
-            cpuError.Width = errorBorder.Width -20;
+            CPUErrorTextBlock.Width = errorBorder.Width -20;
             cpuErrorStackPanel.Width = errorBorder.Width -20;
+            string choosedCPU = cpuComboBox.Text;
+            string choosedMB = mbComboBox.Text;
+            string choosedGPU = gpuComboBox.Text;
+            string choosedRAM = ramComboBox.Text;
+            string choosedHSF = hsfComboBox.Text;
+            string choosedPSU = psuComboBox.Text;
+            string choosedCase = caseComboBox.Text;
+            UniModels cpuActual = DeserializeXML("CpuModels.xml");
+            UniModels MBActual = DeserializeXML("MotherBoardModels.xml");
+            CPUErrorTextBlock.Text = Comparator.cpuCompare(choosedCPU, choosedMB, cpuActual, MBActual) ? "CPU is supported by mother board": "CPU isn't supported by mother board, change mb or cpu";
+            
+
+
+
+
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
