@@ -11,13 +11,16 @@
             <ComboBoxItem Content="CPU"/>
             <ComboBoxItem Content="Mother board"/>
             <ComboBoxItem Content="GPU"/>
+            <ComboBoxItem Content="RAM"/>
+            <ComboBoxItem Content="Cooler"/>
+            <ComboBoxItem Content="PSU"/>
+            <ComboBoxItem Content="Case"/>
         </ComboBox>
         <TextBox x:Name="ModelNameTextBox" HorizontalAlignment="Left" Height="28" Margin="31,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Background="#FFE3E0E0"/>
         <TextBox x:Name="SocketTextBox" HorizontalAlignment="Left" Height="28" Margin="31,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Background="#FFE3E0E0"/>
         <TextBox x:Name="TdpTextBox" HorizontalAlignment="Left" Height="28" Margin="31,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Background="#FFE3E0E0"/>
         <TextBox x:Name="FreqTextBox" HorizontalAlignment="Left" Height="28" Margin="31,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Background="#FFE3E0E0"/>
         <Button x:Name="addComponentButton" Content="ADD" HorizontalAlignment="Left" Height="47" Margin="451,301,0,0" VerticalAlignment="Top" Width="113" Background="#FFC8C8C8" BorderBrush="Black" Click="addComponentButton_Click"/>
-        <TextBox x:Name="ramtextbox" HorizontalAlignment="Left" Height="28" Margin="31,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Background="#FFE3E0E0"/>
 
     </Grid>
 </Window>

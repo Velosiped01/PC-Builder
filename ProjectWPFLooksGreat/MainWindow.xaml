@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="PCBuilder" Height="695" Width="1000" Background="#FFD5D5D5" SizeChanged="MainWindow1_SizeChanged" WindowStyle="None">
     <Grid x:Name="pcBuilderWindow" Margin="0,0,0,10">
-        <Border BorderBrush="White" Background="White" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="140,10,0,0" VerticalAlignment="Top" Width="720" CornerRadius="20,20,20,20" Grid.ColumnSpan="2">
+        <Border x:Name="chooseTheCompLabel" BorderBrush="White" Background="White" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="140,10,0,0" VerticalAlignment="Top" Width="720" CornerRadius="20,20,20,20" Grid.ColumnSpan="2">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="50" Color="LightGray" ShadowDepth="0"/>
 
@@ -58,7 +58,7 @@
 
             </Border.Effect>
             <StackPanel Margin="0,0,0,0">
-                <TextBlock Text="HSF" FontSize="35" FontWeight="Bold" Margin="18 0 0 20" Width="82"/>
+                <TextBlock Text="Cooler" FontSize="30" FontWeight="Bold" Margin="0 5 0 20" Width="94" Height="43"/>
             </StackPanel>
         </Border>
         <Border x:Name="psuBorder" BorderBrush="White" Background="White"  BorderThickness="1" HorizontalAlignment="Left" Height="55" Margin="40,450,0,0" VerticalAlignment="Top" Width="108" CornerRadius="20,20,20,20">
@@ -88,15 +88,14 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="50" Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
-            <StackPanel x:Name="cpuErrorStackPanel" Height="474" VerticalAlignment="Center" HorizontalAlignment="Center" Width="322">
-                <TextBlock TextWrapping="Wrap" Margin="0,0,0,0" x:Name="CPUErrorTextBlock"  Text="Cpu error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="MBErrorTextBlock"  Text="MB error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="GPUErrorTextBlock"  Text="GPU error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="RAMErrorTextBlock"  Text="RAM error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="HSFErrorTextBlock"  Text="HSF error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="PSUErrorTextBlock"  Text="PSU error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="CASEErrorTextBlock"  Text="CASE error field, untill reliase bla bla bla, i know what i need hahahah" FontSize="18" FontWeight="Bold" Width="329" Height="46"/>
-                
+            <StackPanel x:Name="cpuErrorStackPanel" Height="474" Margin="15,1,16,0">
+                <TextBlock TextWrapping="Wrap" Margin="0,0,0,0" x:Name="CPUErrorTextBlock"  Text="Cpu space" FontSize="18" FontWeight="Bold" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="MBErrorTextBlock"  Text="MB space" FontSize="18" FontWeight="Bold" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="GPUErrorTextBlock"  Text="GPU space" FontSize="18" FontWeight="Bold" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="RAMErrorTextBlock"  Text="RAM space" FontSize="18" FontWeight="Bold" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="HSFErrorTextBlock"  Text="Cooler space" FontSize="18" FontWeight="Bold" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="PSUErrorTextBlock"  Text="PSU space" FontSize="18" FontWeight="Bold" Height="46"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,25,0,0" x:Name="CASEErrorTextBlock"  Text="CASE space" FontSize="18" FontWeight="Bold" Height="46"/>
             </StackPanel>
 
         </Border>
@@ -142,6 +141,11 @@
         <Border BorderBrush="Black" Background="#FF838982" BorderThickness="1" HorizontalAlignment="Left" Height="73" Margin="40,0,0,20" VerticalAlignment="Bottom" Width="300" CornerRadius="20">
             <StackPanel Margin="0,9,0,11" HorizontalAlignment="Center" Width="300">
                 <Button x:Name="addNewComponentButton" Content="Add New Component" FontSize="25" FontWeight="Bold" Height="53" Width="300" Click="addNewComponentButton_Click" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" Background="#FFE1E3E1" BorderThickness="1" HorizontalAlignment="Left" Height="73" Margin="360,0,0,20" VerticalAlignment="Bottom" Width="160" CornerRadius="20">
+            <StackPanel Margin="0,9,0,11" HorizontalAlignment="Center" Width="160">
+                <Button x:Name="RefreshButton" Content="Refresh" FontSize="25" FontWeight="Bold" Height="53" Width="148" Click="RefreshButton_Click" Background="{x:Null}" BorderBrush="{x:Null}"/>
             </StackPanel>
         </Border>
 
