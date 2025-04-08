@@ -52,8 +52,8 @@ namespace ProjectWPFLooksGreat
                                 }
                                 else { return "The Mother board socket is not compatible with the selected CPU, change cpu or mb. Cpu Socket<" + cpu.socket + ">."; }
                             }
-                            else { return "Everything looks good."; }
-                        }
+                            
+                        } return "Required CPU."; 
                     }
                 }
             }
