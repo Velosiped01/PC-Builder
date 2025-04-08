@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="PCBuilder" Height="695" Width="1000" Background="#FFD5D5D5" SizeChanged="MainWindow1_SizeChanged" WindowStyle="None">
     <Grid x:Name="pcBuilderWindow" Margin="0,0,0,10">
-        <Border x:Name="chooseTheCompLabel" BorderBrush="White" Background="White" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="140,10,0,0" VerticalAlignment="Top" Width="720" CornerRadius="20,20,20,20" Grid.ColumnSpan="2">
+        <Border x:Name="chooseTheCompLabel" BorderBrush="White" Background="White" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="140,10,0,0" VerticalAlignment="Top" Width="720" CornerRadius="20,20,20,20" Grid.ColumnSpan="2" MouseLeftButtonDown="chooseTheCompLabel_MouseLeftButtonDown">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="50" Color="LightGray" ShadowDepth="0"/>
 

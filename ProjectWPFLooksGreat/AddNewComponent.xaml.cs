@@ -79,8 +79,9 @@ namespace ProjectWPFLooksGreat
                             CpuModel CPU = new CpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text), SocketTextBox.Text);
                             cpuModels.CpuList.Add(CPU);
                             SerializeXML(cpuModels, "CpuModels.xml");
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch { resultLabel.Content = "Failure"; }
                         break;
                     case 1://motherboard
                         UniModels mbModels = new UniModels();
@@ -98,8 +99,12 @@ namespace ProjectWPFLooksGreat
                             MotherBoardModel MB = new MotherBoardModel(ModelNameTextBox.Text,TdpTextBox.Text , FreqTextBox.Text, SocketTextBox.Text);
                             mbModels.MbList.Add(MB);
                             SerializeXML(mbModels, "MotherBoardModels.xml");
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch 
+                        {
+                            resultLabel.Content = "Failure";
+                        }
 
                         break;
                     case 2://GPU
@@ -118,8 +123,11 @@ namespace ProjectWPFLooksGreat
                             GpuModel GPU = new GpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text),Convert.ToInt32(FreqTextBox.Text));
                             gpuModels.GpuList.Add(GPU);
                             SerializeXML(gpuModels, "GpuModels.xml");
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch {
+                            resultLabel.Content = "Failure";
+                        }
 
                         break;
                     case 3://RAM
@@ -138,8 +146,9 @@ namespace ProjectWPFLooksGreat
                             RamModel RAM = new RamModel(ModelNameTextBox.Text, TdpTextBox.Text);
                             ramModels.RamList.Add(RAM);
                             SerializeXML(ramModels, "RamModels.xml");
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch { resultLabel.Content = "Failure"; }
 
                         break;
                     case 4://Cooler/HSF
@@ -158,9 +167,9 @@ namespace ProjectWPFLooksGreat
                             HsfModel HSF = new HsfModel(ModelNameTextBox.Text, TdpTextBox.Text.Split(','), Convert.ToInt32(FreqTextBox.Text), Convert.ToInt32(SocketTextBox.Text));
                             hsfModels.HsfList.Add(HSF);
                             SerializeXML(hsfModels, "CoolerModels.xml");
-                            
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch { resultLabel.Content = "Failure"; }
 
                         break;
                     case 5://PSU/Zdroj
@@ -179,8 +188,9 @@ namespace ProjectWPFLooksGreat
                             PsuModel PSU = new PsuModel(ModelNameTextBox.Text, TdpTextBox.Text, Convert.ToInt32(FreqTextBox.Text));
                             psuModels.PsuList.Add(PSU);
                             SerializeXML(psuModels, "PsuModels.xml");
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch { resultLabel.Content = "Failure"; }
 
                         break;
                     case 6://Case
@@ -199,8 +209,9 @@ namespace ProjectWPFLooksGreat
                             CaseModel cs = new CaseModel(ModelNameTextBox.Text, TdpTextBox.Text, Convert.ToInt32(FreqTextBox.Text), Convert.ToInt32(SocketTextBox.Text));
                             caseModels.CaseList.Add(cs);
                             SerializeXML(caseModels, "CaseModels.xml");
+                            resultLabel.Content = "Success";
                         }
-                        catch { }
+                        catch { resultLabel.Content = "Failure"; }
 
                         break;
                     default:
@@ -231,42 +242,49 @@ namespace ProjectWPFLooksGreat
                             TdpTextBox.Text = "Tdp<65>";
                             FreqTextBox.Text = "-";
                             SocketTextBox.Text = "Socket<AM4..>";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:Amd Ryzen 7 3700X tdp:65 socket:AM4). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 1:
                             ModelNameTextBox.Text = "Mother board name";
                             TdpTextBox.Text = "format<ATX...>"; ;
                             FreqTextBox.Text = "Socket<AM4..>";
                             SocketTextBox.Text = "Memory type<DDR4..>";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:GIGABYTE B550 Format:mATX... socket:AM4 Memory type:DDR4). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 2: 
                             ModelNameTextBox.Text = "Gpu model";
                             TdpTextBox.Text = "Length";
                             FreqTextBox.Text = "Power comsumption";
                             SocketTextBox.Text = "-";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:GAINWARD GeForce RTX 3070 Length:310 Power Consumption:250). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 3:
                             ModelNameTextBox.Text = "Ram model name";
                             TdpTextBox.Text = "Ram Type<DDR4..>";
                             FreqTextBox.Text = "-";
                             SocketTextBox.Text = "-";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:Kingston FURY 32GB KIT DDR4 Ram type:DDR4). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 4:
                             ModelNameTextBox.Text = "Cooler name";
                             TdpTextBox.Text = "Cooler socket<AM4,AM5,...>";
                             FreqTextBox.Text = "Cooler max tdp";
                             SocketTextBox.Text = "Cooler height";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:Cooler Master HYPER 212 socket:AM4,AM5,1150,1151... TDP:120 Height:315). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 5:
                             ModelNameTextBox.Text = "Psu name";
                             TdpTextBox.Text = "Psu form<ATX..>";
                             FreqTextBox.Text = "Psu power<800..>";
                             SocketTextBox.Text = "-";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:Corsair RM850x format:mATX power:750). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 6:
                             ModelNameTextBox.Text = "Case model name";
                             TdpTextBox.Text = "Case form<ATX..>";
                             FreqTextBox.Text = "Max GPU Length";
                             SocketTextBox.Text = "Max cooler height";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:Montech X3 MESH form:ATX Max gpu length:370 Max cooler height:215). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         default:
                             ModelNameTextBox.Text = "Cpu model";
