@@ -58,10 +58,10 @@ namespace ProjectWPFLooksGreat
 
         
 
-        private void compareButton_Click(object sender, RoutedEventArgs e)
+        private void compareButton_Click(object sender, RoutedEventArgs e) //tlacitko na porovnani vsech komponent
         {
             
-            cpuErrorStackPanel.Width = errorBorder.Width -20;
+            
             string choosedCPU = cpuComboBox.Text;
             string choosedMB = mbComboBox.Text;
             string choosedGPU = gpuComboBox.Text;

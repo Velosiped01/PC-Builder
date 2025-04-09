@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectWPFLooksGreat
 {
-    class Comparator
+    class Comparator//porovnava veskery komponenty a vraci string s vysledkem porovnani
     {
         public static string cpuCompare(string choosedCpu, string choosedMB, UniModels cpuActual, UniModels MBActual)
         {
