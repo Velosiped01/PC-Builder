@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniModels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CpuList />
+  <MbList />
+  <GpuList />
+  <RamList />
+  <HsfList>
+    <HsfModel>
+      <hsfName>Cooler Master X Dream i117</hsfName>
+      <hsfSocket>
+        <string>1155</string>
+        <string>1156</string>
+        <string>775</string>
+      </hsfSocket>
+      <hsfTdp>65</hsfTdp>
+      <hsfHeight>60</hsfHeight>
+    </HsfModel>
+    <HsfModel>
+      <hsfName>Cooler Master HYPER 212 BLACK X DUO</hsfName>
+      <hsfSocket>
+        <string>AM4</string>
+        <string>AM5</string>
+        <string>1150</string>
+        <string>1151</string>
+        <string>1155</string>
+        <string>1156</string>
+        <string>1200</string>
+        <string>1700</string>
+        <string>1851</string>
+      </hsfSocket>
+      <hsfTdp>152</hsfTdp>
+      <hsfHeight>125</hsfHeight>
+    </HsfModel>
+  </HsfList>
+  <PsuList />
+  <CaseList />
+</UniModels>

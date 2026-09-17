@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniModels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CpuList />
+  <MbList />
+  <GpuList />
+  <RamList>
+    <RamModel>
+      <ramName>Kingston FURY 32GB KIT DDR4</ramName>
+      <ramType>DDR4</ramType>
+    </RamModel>
+    <RamModel>
+      <ramName>Kingston FURY 32GB KIT DDR5 Beast EXPO</ramName>
+      <ramType>DDR5</ramType>
+    </RamModel>
+  </RamList>
+  <HsfList />
+  <PsuList />
+  <CaseList />
+</UniModels>
