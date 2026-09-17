@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniModels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CpuList />
+  <MbList />
+  <GpuList />
+  <RamList />
+  <HsfList />
+  <PsuList />
+  <CaseList>
+    <CaseModel>
+      <caseName>Corsair 4000D AIRFLOW Tempered Glass Black</caseName>
+      <caseForm>ATX</caseForm>
+      <maxGpuLength>360</maxGpuLength>
+      <maxHsfHeight>170</maxHsfHeight>
+    </CaseModel>
+    <CaseModel>
+      <caseName>Montech X3 MESH Black</caseName>
+      <caseForm>ATX</caseForm>
+      <maxGpuLength>305</maxGpuLength>
+      <maxHsfHeight>160</maxHsfHeight>
+    </CaseModel>
+    <CaseModel>
+      <caseName>Montech AIR 100 ARGB Black</caseName>
+      <caseForm>mATX</caseForm>
+      <maxGpuLength>330</maxGpuLength>
+      <maxHsfHeight>161</maxHsfHeight>
+    </CaseModel>
+  </CaseList>
+</UniModels>

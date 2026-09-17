@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniModels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CpuList />
+  <MbList>
+    <MotherBoardModel>
+      <mbName>GIGABYTE B650 EAGLE AX</mbName>
+      <mbsocket>AM5</mbsocket>
+      <mbform>ATX</mbform>
+      <supportedram>DDR5</supportedram>
+    </MotherBoardModel>
+    <MotherBoardModel>
+      <mbName>ASUS TUF Gaiming B550-Plus</mbName>
+      <mbsocket>AM4</mbsocket>
+      <mbform>ATX</mbform>
+      <supportedram>DDR4</supportedram>
+    </MotherBoardModel>
+    <MotherBoardModel>
+      <mbName>MSI MEG Z890 ACE</mbName>
+      <mbsocket>1851</mbsocket>
+      <mbform>ATX</mbform>
+      <supportedram>DDR5</supportedram>
+    </MotherBoardModel>
+  </MbList>
+  <GpuList />
+  <RamList />
+  <HsfList />
+  <PsuList />
+  <CaseList />
+</UniModels>

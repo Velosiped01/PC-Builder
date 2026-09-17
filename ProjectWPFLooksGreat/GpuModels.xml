@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniModels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CpuList />
+  <MbList />
+  <GpuList>
+    <GpuModel>
+      <gpuName>GAINWARD GeForce RXT 4060 Ti</gpuName>
+      <gpuLenght>250</gpuLenght>
+      <gpuPowerComs>160</gpuPowerComs>
+    </GpuModel>
+    <GpuModel>
+      <gpuName>PALIT GeForce RTX 5090 GameRock </gpuName>
+      <gpuLenght>332</gpuLenght>
+      <gpuPowerComs>575</gpuPowerComs>
+    </GpuModel>
+  </GpuList>
+  <RamList />
+  <HsfList />
+  <PsuList />
+  <CaseList />
+</UniModels>
