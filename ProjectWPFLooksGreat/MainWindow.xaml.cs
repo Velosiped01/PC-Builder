@@ -22,26 +22,6 @@ namespace ProjectWPFLooksGreat
     public partial class MainWindow : Window
     {
         public static AddNewComponent AddNewComponentWindow;
-
-        
-        private UniModels DeserializeXML(string filepath)
-        {
-            try
-            {
-                XmlSerializer xml = new XmlSerializer(typeof(UniModels));
-                using (FileStream fs = new FileStream(filepath, FileMode.Open))
-                {
-
-                    UniModels xmluni = (UniModels)xml.Deserialize(fs);
-
-                    return xmluni;
-                }
-            }
-            catch{ } return null;
-        }
-       
-        
-
         public MainWindow()
         {
             InitializeComponent();
@@ -59,34 +39,22 @@ namespace ProjectWPFLooksGreat
         
 
         private void compareButton_Click(object sender, RoutedEventArgs e) //tlacitko na porovnani vsech komponent
-        {
-            
-            
-            string choosedCPU = cpuComboBox.Text;
-            string choosedMB = mbComboBox.Text;
-            string choosedGPU = gpuComboBox.Text;
-            string choosedRAM = ramComboBox.Text;
-            string choosedHSF = hsfComboBox.Text;
-            string choosedPSU = psuComboBox.Text;
-            string choosedCase = caseComboBox.Text;
-            UniModels cpuActual = DeserializeXML("CpuModels.xml");
-            UniModels MBActual = DeserializeXML("MotherBoardModels.xml");
-            UniModels GpuActual = DeserializeXML("GpuModels.xml");
-            UniModels RamActual = DeserializeXML("RamModels.xml");
-            UniModels HsfActual = DeserializeXML("CoolerModels.xml");
-            UniModels PsuActual = DeserializeXML("PsuModels.xml");
-            UniModels CaseActual = DeserializeXML("CaseModels.xml");
-            CPUErrorTextBlock.Text = Comparator.cpuCompare(choosedCPU, choosedMB, cpuActual, MBActual);
-            MBErrorTextBlock.Text = Comparator.mbCompare(choosedCPU, choosedMB, cpuActual, MBActual);
-            GPUErrorTextBlock.Text = Comparator.gpuCompare(choosedGPU, GpuActual);
-            RAMErrorTextBlock.Text = Comparator.ramCompare(choosedRAM, choosedMB, RamActual, MBActual);
-            HSFErrorTextBlock.Text = Comparator.hsfCompare(choosedHSF, choosedCPU, HsfActual, cpuActual);
-            PSUErrorTextBlock.Text = Comparator.psuCompare(choosedPSU, choosedCPU, choosedGPU, PsuActual, GpuActual, cpuActual);
-            CASEErrorTextBlock.Text = Comparator.caseCompare(choosedCase, choosedGPU, choosedPSU, choosedHSF, choosedMB, CaseActual, GpuActual, PsuActual, HsfActual, MBActual);
-
-
-
-
+        { // vytahuje objekt z comboboxu, zapisuje ten objekt do promenny 
+            //zavola metody z comparator.cs pro kazdou componentu pc a vraci string s vysledkem do textblocku 
+            CpuModel choosedCPU = (CpuModel) cpuComboBox.SelectedItem;
+            MotherBoardModel choosedMB = (MotherBoardModel) mbComboBox.SelectedItem;
+            GpuModel choosedGPU = (GpuModel) gpuComboBox.SelectedItem;
+            RamModel choosedRAM = (RamModel) ramComboBox.SelectedItem;
+            HsfModel choosedHSF = (HsfModel) hsfComboBox.SelectedItem;
+            PsuModel choosedPSU = (PsuModel) psuComboBox.SelectedItem;
+            CaseModel choosedCase = (CaseModel) caseComboBox.SelectedItem;
+            CPUErrorTextBlock.Text = Comparator.cpuCompare(choosedCPU, choosedMB);
+            MBErrorTextBlock.Text = Comparator.cpuCompare(choosedCPU, choosedMB);
+            GPUErrorTextBlock.Text = Comparator.gpuCompare(choosedGPU);
+            RAMErrorTextBlock.Text = Comparator.ramCompare(choosedRAM, choosedMB);
+            HSFErrorTextBlock.Text = Comparator.hsfCompare(choosedHSF, choosedCPU);
+            PSUErrorTextBlock.Text = Comparator.psuCompare(choosedPSU, choosedCPU, choosedGPU);
+            CASEErrorTextBlock.Text = Comparator.caseCompare(choosedCase, choosedGPU, choosedPSU, choosedHSF, choosedMB);
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -131,64 +99,64 @@ namespace ProjectWPFLooksGreat
             if (File.Exists(@"CpuModels.xml"))
             {
                 cpuComboBox.Items.Clear();
-                UniModels cpuActual = DeserializeXML("CpuModels.xml");
+                UniModels cpuActual = UniModels.DeserializeXML("CpuModels.xml");
                 foreach (CpuModel CPU in cpuActual.CpuList)
                 {
-                    cpuComboBox.Items.Add(CPU.cpu);
+                    cpuComboBox.Items.Add(CPU);
                 }
             }
             if (File.Exists(@"MotherBoardModels.xml"))
             {
                 mbComboBox.Items.Clear();
-                UniModels mbActual = DeserializeXML("MotherBoardModels.xml");
+                UniModels mbActual = UniModels.DeserializeXML("MotherBoardModels.xml");
                 foreach (MotherBoardModel MB in mbActual.MbList)
                 {
-                    mbComboBox.Items.Add(MB.mbName);
+                    mbComboBox.Items.Add(MB);
                 }
             }
             if (File.Exists(@"GpuModels.xml"))
             {
                 gpuComboBox.Items.Clear();
-                UniModels gpuActual = DeserializeXML("GpuModels.xml");
+                UniModels gpuActual = UniModels.DeserializeXML("GpuModels.xml");
                 foreach (GpuModel GPU in gpuActual.GpuList)
                 {
-                    gpuComboBox.Items.Add(GPU.gpuName);
+                    gpuComboBox.Items.Add(GPU);
                 }
             }
             if (File.Exists(@"RamModels.xml"))
             {
                 ramComboBox.Items.Clear();
-                UniModels ramActual = DeserializeXML("RamModels.xml");
+                UniModels ramActual = UniModels.DeserializeXML("RamModels.xml");
                 foreach (RamModel RAM in ramActual.RamList)
                 {
-                    ramComboBox.Items.Add(RAM.ramName);
+                    ramComboBox.Items.Add(RAM);
                 }
             }
             if (File.Exists(@"CoolerModels.xml"))
             {
                 hsfComboBox.Items.Clear();
-                UniModels hsfActual = DeserializeXML("CoolerModels.xml");
+                UniModels hsfActual = UniModels.DeserializeXML("CoolerModels.xml");
                 foreach (HsfModel hsf in hsfActual.HsfList)
                 {
-                    hsfComboBox.Items.Add(hsf.hsfName);
+                    hsfComboBox.Items.Add(hsf);
                 }
             }
             if (File.Exists(@"PsuModels.xml"))
             {
                 psuComboBox.Items.Clear();
-                UniModels psuActual = DeserializeXML("PsuModels.xml");
+                UniModels psuActual = UniModels.DeserializeXML("PsuModels.xml");
                 foreach (PsuModel psu in psuActual.PsuList)
                 {
-                    psuComboBox.Items.Add(psu.psuName);
+                    psuComboBox.Items.Add(psu);
                 }
             }
             if (File.Exists(@"CaseModels.xml"))
             {
                 caseComboBox.Items.Clear();
-                UniModels caseActual = DeserializeXML("CaseModels.xml");
+                UniModels caseActual = UniModels.DeserializeXML("CaseModels.xml");
                 foreach (CaseModel Case in caseActual.CaseList)
                 {
-                    caseComboBox.Items.Add(Case.caseName);
+                    caseComboBox.Items.Add(Case);
                 }
             }
         }

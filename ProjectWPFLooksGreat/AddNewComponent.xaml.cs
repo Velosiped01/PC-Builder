@@ -19,37 +19,20 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Diagnostics.Eventing.Reader;
 using MaterialDesignThemes.Wpf;
+using System.ComponentModel;
 
 namespace ProjectWPFLooksGreat
 {
-   
+
     public partial class AddNewComponent : Window
     {
-        
-        private void SerializeXML(UniModels List, string filepath) //Serializace či zapis componentu do xml
+        public static void AddComponent(string filepath, IUniComponent component)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(UniModels));
-            using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
-            {
-                xml.Serialize(fs, List);
-
-            }
+            UniModels models = File.Exists(filepath) ? UniModels.DeserializeXML(filepath) : new UniModels();
+            component.AddTo(models);
+            UniModels.SerializeXML(models, filepath);
         }
-        private  UniModels DeserializeXML(string filepath) //Vyběr komponentu z xml
-        {
-           
-            XmlSerializer xml = new XmlSerializer(typeof(UniModels));
-            using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
-            { 
-                
-                    UniModels xmluni = (UniModels)xml.Deserialize(fs);
-                
-               return xmluni;
-            }
-        }
-        
-
-
+    
 
         public AddNewComponent()
         {
@@ -60,171 +43,74 @@ namespace ProjectWPFLooksGreat
         {
             if (ModelNameTextBox.Text != null && TdpTextBox != null && FreqTextBox.Text != null && SocketTextBox.Text != null)
             {
+                int model;
+                int tdp;
+                int freq;
+                int socket;
                 switch (componentCombobox.SelectedIndex)
                 {
-
-                    case 0://cpu
-                        UniModels cpuModels = new UniModels();
-                        if (File.Exists(@"CpuModels.xml"))//kontrola na existence xml
+                    case 0: //cpu
+                        if (int.TryParse(TdpTextBox.Text, out tdp))
                         {
-                            
-                            UniModels doc = DeserializeXML("CpuModels.xml");
-                            foreach (CpuModel cpu in doc.CpuList)//at´ nesmaže stare komponenty
-                            {
-                                cpuModels.CpuList.Add(cpu);
-                            }
-                        }
-                        try//aby program nespadl, kdyz zadate spatny format, nic nezapise do xml
-                        {
-                            CpuModel CPU = new CpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text), SocketTextBox.Text);
-                            cpuModels.CpuList.Add(CPU);
-                            SerializeXML(cpuModels, "CpuModels.xml");
+                            CpuModel CPU = new CpuModel(ModelNameTextBox.Text, tdp, SocketTextBox.Text);
+                            AddComponent(@"CpuModels.xml", CPU);
                             resultLabel.Content = "Success";
                         }
-                        catch { resultLabel.Content = "Failure"; }
+                        else { resultLabel.Content = "Invalid TDP"; }
                         break;
                     case 1://motherboard
-                        UniModels mbModels = new UniModels();
-                        if (File.Exists(@"MotherBoardModels.xml"))
-                        {
-                            UniModels doc = DeserializeXML("MotherBoardModels.xml");
-
-                            foreach (MotherBoardModel mb in doc.MbList)
-                            {
-                                mbModels.MbList.Add(mb);
-                            }
-                        }
-                        try
-                        {
-                            MotherBoardModel MB = new MotherBoardModel(ModelNameTextBox.Text,TdpTextBox.Text , FreqTextBox.Text, SocketTextBox.Text);
-                            mbModels.MbList.Add(MB);
-                            SerializeXML(mbModels, "MotherBoardModels.xml");
-                            resultLabel.Content = "Success";
-                        }
-                        catch 
-                        {
-                            resultLabel.Content = "Failure";
-                        }
-
+                        MotherBoardModel MB = new MotherBoardModel(ModelNameTextBox.Text, TdpTextBox.Text, FreqTextBox.Text, SocketTextBox.Text);
+                        AddComponent(@"MotherBoardModels.xml", MB);
+                        resultLabel.Content = "Success";
                         break;
                     case 2://GPU
-                        UniModels gpuModels = new UniModels();
-                        if (File.Exists(@"GpuModels.xml"))
-                        {
-                            UniModels doc = DeserializeXML("GpuModels.xml");
-
-                            foreach (GpuModel gpu in doc.GpuList)
-                            {
-                                gpuModels.GpuList.Add(gpu);
-                            }
-                        }
-                        try 
-                        {
-                            GpuModel GPU = new GpuModel(ModelNameTextBox.Text, Convert.ToInt32(TdpTextBox.Text),Convert.ToInt32(FreqTextBox.Text));
-                            gpuModels.GpuList.Add(GPU);
-                            SerializeXML(gpuModels, "GpuModels.xml");
+                        if (int.TryParse(TdpTextBox.Text, out tdp) && int.TryParse(FreqTextBox.Text, out freq)){
+                            GpuModel GPU = new GpuModel(ModelNameTextBox.Text, tdp , freq);
+                            AddComponent(@"GpuModels.xml", GPU);
                             resultLabel.Content = "Success";
                         }
-                        catch {
-                            resultLabel.Content = "Failure";
-                        }
-
+                        else { resultLabel.Content = "Invalid Length or Power comsumption"; }
                         break;
                     case 3://RAM
-                        UniModels ramModels = new UniModels();
-                        if (File.Exists(@"RamModels.xml"))
-                        {
-                            UniModels doc = DeserializeXML("RamModels.xml");
-
-                            foreach (RamModel ram in doc.RamList)
-                            {
-                                ramModels.RamList.Add(ram);
-                            }
-                        }
-                        try
-                        {
-                            RamModel RAM = new RamModel(ModelNameTextBox.Text, TdpTextBox.Text);
-                            ramModels.RamList.Add(RAM);
-                            SerializeXML(ramModels, "RamModels.xml");
-                            resultLabel.Content = "Success";
-                        }
-                        catch { resultLabel.Content = "Failure"; }
-
+                        RamModel RAM = new RamModel(ModelNameTextBox.Text, TdpTextBox.Text);
+                        AddComponent(@"RamModels.xml", RAM);
+                        resultLabel.Content = "Success";
                         break;
                     case 4://Cooler/HSF
-                        UniModels hsfModels = new UniModels();
-                        if (File.Exists(@"CoolerModels.xml"))
+                        if (int.TryParse(SocketTextBox.Text, out socket) && int.TryParse(FreqTextBox.Text, out freq))
                         {
-                            UniModels doc = DeserializeXML("CoolerModels.xml");
-
-                            foreach (HsfModel hsf in doc.HsfList)
-                            {
-                                hsfModels.HsfList.Add(hsf);
-                            }
-                        }
-                        try
-                        {
-                            HsfModel HSF = new HsfModel(ModelNameTextBox.Text, TdpTextBox.Text.Split(','), Convert.ToInt32(FreqTextBox.Text), Convert.ToInt32(SocketTextBox.Text));
-                            hsfModels.HsfList.Add(HSF);
-                            SerializeXML(hsfModels, "CoolerModels.xml");
+                            HsfModel HSF = new HsfModel(ModelNameTextBox.Text, TdpTextBox.Text.Split(','), freq, socket);
+                            AddComponent(@"CoolerModels.xml", HSF);
                             resultLabel.Content = "Success";
-                        }
-                        catch { resultLabel.Content = "Failure"; }
-
+                        } else { resultLabel.Content = "Invalid tdp or height"; }
                         break;
                     case 5://PSU/Zdroj
-                        UniModels psuModels = new UniModels();
-                        if (File.Exists(@"PsuModels.xml"))
+                        if (int.TryParse(FreqTextBox.Text, out freq))
                         {
-                            UniModels doc = DeserializeXML("PsuModels.xml");
-
-                            foreach (PsuModel psu in doc.PsuList)
-                            {
-                                psuModels.PsuList.Add(psu);
-                            }
-                        }
-                        try
-                        {
-                            PsuModel PSU = new PsuModel(ModelNameTextBox.Text, TdpTextBox.Text, Convert.ToInt32(FreqTextBox.Text));
-                            psuModels.PsuList.Add(PSU);
-                            SerializeXML(psuModels, "PsuModels.xml");
+                            PsuModel PSU = new PsuModel(ModelNameTextBox.Text, TdpTextBox.Text, freq);
+                            AddComponent(@"PsuModels.xml", PSU);
                             resultLabel.Content = "Success";
-                        }
-                        catch { resultLabel.Content = "Failure"; }
-
-                        break;
+                        } else { resultLabel.Content = "Invalid power of PSU"; }
+                            break;
                     case 6://Case
-                        UniModels caseModels = new UniModels();
-                        if (File.Exists(@"CaseModels.xml"))
+                        if (int.TryParse(SocketTextBox.Text, out socket) && int.TryParse(FreqTextBox.Text, out freq))
                         {
-                            UniModels doc = DeserializeXML("CaseModels.xml");
-
-                            foreach (CaseModel Case in doc.CaseList)
-                            {
-                                caseModels.CaseList.Add(Case);
-                            }
-                        }
-                        try
-                        {
-                            CaseModel cs = new CaseModel(ModelNameTextBox.Text, TdpTextBox.Text, Convert.ToInt32(FreqTextBox.Text), Convert.ToInt32(SocketTextBox.Text));
-                            caseModels.CaseList.Add(cs);
-                            SerializeXML(caseModels, "CaseModels.xml");
+                            CaseModel CASE = new CaseModel(ModelNameTextBox.Text, TdpTextBox.Text, freq , socket);
+                            AddComponent(@"CaseModels.xml", CASE);
                             resultLabel.Content = "Success";
                         }
-                        catch { resultLabel.Content = "Failure"; }
-
+                        else { resultLabel.Content = "Invalid Max cooler height or Max GPU Length"; }
+                        
                         break;
-                    default:
-                        //nic
-                       
-                        break;
+                    default: resultLabel.Content = "Choose the type of component"; break;
                 }
-               
-            
 
             }
+             else{ resultLabel.Content = "Failure"; }
             
+
         }
+
 
         
 
@@ -263,7 +149,7 @@ namespace ProjectWPFLooksGreat
                             TdpTextBox.Text = "Ram Type<DDR4..>";
                             FreqTextBox.Text = "-";
                             SocketTextBox.Text = "-";
-                            AddNewComponentHelperTextBlock.Text = "Example( name:Kingston FURY 32GB KIT DDR4 Ram type:DDR4). Dont add spaces where they arent be and write in the same case as shown in the example";
+                            AddNewComponentHelperTextBlock.Text = "Example( name:Kingston FURY 32GB KIT DDR4, Ram type:DDR4). Dont add spaces where they arent be and write in the same case as shown in the example";
                             break;
                         case 4:
                             ModelNameTextBox.Text = "Cooler name";
